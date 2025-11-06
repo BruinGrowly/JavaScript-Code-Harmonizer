@@ -241,7 +241,7 @@ export function ljpwSimilarity(
 export function ljpwSimilarityWeighted(
   s1: string,
   s2: string,
-  weights: PerceptualWeights = DEFAULT_WEIGHTS
+  _weights: PerceptualWeights = DEFAULT_WEIGHTS
 ): number {
   // For now, use standard LJPW similarity
   // This will be extended when we add tokenization support

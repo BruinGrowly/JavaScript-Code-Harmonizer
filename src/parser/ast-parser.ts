@@ -75,6 +75,7 @@ export class ASTSemanticParser {
   extractFunctions(code: string): Array<{ node: t.Function; metadata: FunctionMetadata }> {
     const ast = this.parseSource(code);
     const functions: Array<{ node: t.Function; metadata: FunctionMetadata }> = [];
+    const self = this;
 
     traverse(ast, {
       // Function declarations: function foo() {}
@@ -82,7 +83,7 @@ export class ASTSemanticParser {
         const node = path.node;
         functions.push({
           node,
-          metadata: this.extractFunctionMetadata(node, path),
+          metadata: self.extractFunctionMetadata(node, path),
         });
       },
 
@@ -94,7 +95,7 @@ export class ASTSemanticParser {
         if (t.isVariableDeclarator(parent) && t.isIdentifier(parent.id)) {
           functions.push({
             node,
-            metadata: this.extractFunctionMetadata(node, path, parent.id.name),
+            metadata: self.extractFunctionMetadata(node, path, parent.id.name),
           });
         }
       },
@@ -106,7 +107,7 @@ export class ASTSemanticParser {
         if (t.isVariableDeclarator(parent) && t.isIdentifier(parent.id)) {
           functions.push({
             node,
-            metadata: this.extractFunctionMetadata(node, path, parent.id.name),
+            metadata: self.extractFunctionMetadata(node, path, parent.id.name),
           });
         }
       },
@@ -117,7 +118,7 @@ export class ASTSemanticParser {
         if (t.isIdentifier(node.key)) {
           functions.push({
             node: node as any, // ClassMethod extends Function conceptually
-            metadata: this.extractFunctionMetadata(node as any, path),
+            metadata: self.extractFunctionMetadata(node as any, path),
           });
         }
       },
@@ -128,7 +129,7 @@ export class ASTSemanticParser {
         if (t.isIdentifier(node.key)) {
           functions.push({
             node: node as any,
-            metadata: this.extractFunctionMetadata(node as any, path),
+            metadata: self.extractFunctionMetadata(node as any, path),
           });
         }
       },
@@ -184,7 +185,7 @@ export class ASTSemanticParser {
     // Extract docstring (JSDoc comment)
     let docstring: string | undefined;
     if (path && path.node.leadingComments) {
-      const jsdocComment = path.node.leadingComments.find((comment) =>
+      const jsdocComment = path.node.leadingComments.find((comment: any) =>
         comment.value.trim().startsWith('*')
       );
       if (jsdocComment) {
@@ -240,9 +241,14 @@ export class ASTSemanticParser {
       return { concepts, executionMap };
     }
 
+    // Convert body to block statement if it's an expression (arrow function)
+    const bodyBlock: t.BlockStatement = t.isBlockStatement(functionNode.body)
+      ? functionNode.body
+      : t.blockStatement([t.returnStatement(functionNode.body)]);
+
     // Traverse the function body
     traverse(
-      t.file(t.program([t.expressionStatement(t.functionExpression(null, [], functionNode.body))])),
+      t.file(t.program([t.expressionStatement(t.functionExpression(null, [], bodyBlock))])),
       {
         // Call expressions - map based on the function being called
         CallExpression: (path) => {

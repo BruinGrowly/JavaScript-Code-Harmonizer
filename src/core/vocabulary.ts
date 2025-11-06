@@ -154,7 +154,6 @@ export const PROGRAMMING_VERBS: Record<string, Dimension> = {
   perform: 'power',
   trigger: 'power',
   fire: 'power',
-  emit: 'power',
   dispatch: 'power',
   invoke: 'power',
   call: 'power',
