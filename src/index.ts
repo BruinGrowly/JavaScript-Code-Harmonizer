@@ -44,5 +44,20 @@ export {
   type ExecutionMapping,
 } from './parser/ast-parser';
 
+// Semantic naming
+export {
+  SemanticNamingEngine,
+  type ActionVerb,
+  type NamingSuggestion,
+} from './naming/semantic-naming';
+
+// CLI and analysis
+export {
+  CodeHarmonizer,
+  type HarmonizerConfig,
+  type FileAnalysisResult,
+  type FunctionAnalysisResult,
+} from './cli/harmonizer';
+
 // Version info
 export const VERSION = '0.2.0';

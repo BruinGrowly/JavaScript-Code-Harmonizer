@@ -127,6 +127,169 @@ npm run example    # Compiled JavaScript
 npm run example:ts # Direct TypeScript execution
 ```
 
+## CLI Usage
+
+The Harmonizer includes a powerful command-line tool for analyzing JavaScript/TypeScript files.
+
+### Installation
+
+After building the project:
+
+```bash
+npm run build
+npm link  # Makes 'harmonizer' command available globally
+```
+
+### Basic Analysis
+
+Analyze a file for semantic bugs:
+
+```bash
+harmonizer path/to/your/file.js
+```
+
+### Command-Line Options
+
+```bash
+harmonizer <file> [options]
+
+Options:
+  --suggest-names        Suggest better function names based on implementation
+  --threshold <number>   Set disharmony threshold (default: 0.5)
+  --format json          Output results as JSON (for CI/CD integration)
+  --verbose, -v          Show detailed semantic trajectories
+```
+
+### Example: Analyze with All Features
+
+```bash
+harmonizer examples/test-files/buggy-code.js --verbose --suggest-names
+```
+
+**Output:**
+```
+======================================================================
+JavaScript Code Harmonizer v0.2.0
+Semantic Bug Detection & Code Analysis
+======================================================================
+
+File: examples/test-files/buggy-code.js
+Functions analyzed: 5
+
+ANALYSIS RESULTS:
+──────────────────────────────────────────────────────────────────────
+
+⚠️  getUserData:1
+   Disharmony: 0.849 📕 HIGH
+   Intent:     Coordinates(L=0.10, J=0.10, P=0.10, W=0.70)
+   Execution:  Coordinates(L=0.10, J=0.10, P=0.70, W=0.10)
+
+   📍 SEMANTIC TRAJECTORY:
+   ┌────────────────────────────────────────────────────────┐
+   │ Dimension    Intent   →   Execution      Δ            │
+   ├────────────────────────────────────────────────────────┤
+   │ Love         0.10  →  0.10      +0.00  ~ │
+   │ Justice      0.10  →  0.10      +0.00  ~ │
+   │ Power        0.10  →  0.70      +0.60  ⚠️ │
+   │ Wisdom       0.70  →  0.10      -0.60  ⚠️ │
+   └────────────────────────────────────────────────────────┘
+
+   💡 BETTER NAME SUGGESTIONS:
+      1. delete (similarity: 0.957)
+      2. remove (similarity: 0.957)
+      3. destroy (similarity: 0.941)
+
+──────────────────────────────────────────────────────────────────────
+SUMMARY:
+   Total Functions:    5
+   Harmonious:         0 ✅
+   Disharmonious:      5 ⚠️
+   Average Disharmony: 0.723
+
+   Severity Breakdown:
+      Excellent: 0
+      Low:       0
+      Medium:    2
+      High:      3
+      Critical:  0
+
+======================================================================
+```
+
+### JSON Output for CI/CD
+
+Use JSON output for automated tooling:
+
+```bash
+harmonizer myfile.js --format json > report.json
+```
+
+**JSON Structure:**
+```json
+{
+  "filePath": "myfile.js",
+  "functions": [
+    {
+      "name": "getUserData",
+      "line": 5,
+      "disharmony": 0.849,
+      "severity": "high",
+      "intent": {
+        "coordinates": "Coordinates(L=0.10, J=0.10, P=0.10, W=0.70)",
+        "dominant": "wisdom"
+      },
+      "execution": {
+        "coordinates": "Coordinates(L=0.10, J=0.10, P=0.70, W=0.10)",
+        "dominant": "power"
+      },
+      "suggestions": [
+        { "name": "delete", "similarity": 0.957 },
+        { "name": "remove", "similarity": 0.957 }
+      ]
+    }
+  ],
+  "summary": {
+    "totalFunctions": 5,
+    "harmonious": 0,
+    "disharmonious": 5,
+    "avgDisharmony": 0.723,
+    "severityCounts": {
+      "excellent": 0,
+      "low": 0,
+      "medium": 2,
+      "high": 3,
+      "critical": 0
+    }
+  }
+}
+```
+
+### Exit Codes
+
+The CLI returns appropriate exit codes for CI/CD integration:
+
+- `0`: All functions are harmonious (disharmony ≤ threshold)
+- `1`: Semantic bugs detected (disharmony > threshold) or analysis error
+
+### Programmatic Usage
+
+You can also use the CLI programmatically:
+
+```typescript
+import { CodeHarmonizer } from 'javascript-code-harmonizer';
+
+const harmonizer = new CodeHarmonizer({
+  threshold: 0.5,
+  suggestNames: true,
+  format: 'text',
+  verbose: true,
+});
+
+const result = await harmonizer.analyzeFile('myfile.js');
+const output = harmonizer.generateOutput(result);
+console.log(output);
+```
+
 ## Usage
 
 ### Text Similarity Comparison
