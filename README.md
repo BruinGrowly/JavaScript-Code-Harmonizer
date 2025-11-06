@@ -34,11 +34,23 @@ For those interested in the mathematical and philosophical underpinnings:
 
 ## Features
 
-- **Multi-metric Similarity**: Combines multiple algorithms for robust code comparison
+### Semantic Analysis & Bug Detection
+- **Semantic Bug Detection**: Detects when function names contradict their implementations
+- **ICE Framework**: Intent-Context-Execution analysis for semantic harmony
+- **4D Semantic Space**: Maps code to Love-Justice-Power-Wisdom coordinates
+- **AST-Based Analysis**: Parses JavaScript/TypeScript using Babel
+- **190+ Verb Vocabulary**: Comprehensive programming verb-to-dimension mappings
+
+### Code Similarity Metrics
+- **Multi-metric Similarity**: Combines Levenshtein distance and Jensen-Shannon divergence
 - **Configurable Weighting**: Adjust the importance of different similarity components
+- **Perceptual Weighting**: Domain-specific adjustments for code elements
+
+### Developer Experience
 - **TypeScript Support**: Fully typed for excellent IDE integration
 - **Comprehensive Testing**: High test coverage with Jest
 - **Production Ready**: Linting, formatting, and build tools configured
+- **Working Examples**: Real-world semantic bug detection demos
 
 ## Installation
 
@@ -46,9 +58,78 @@ For those interested in the mathematical and philosophical underpinnings:
 npm install
 ```
 
+## Quick Start
+
+### Detect a Semantic Bug
+
+```typescript
+import { SemanticEngine, ASTSemanticParser } from 'javascript-code-harmonizer';
+
+const code = `
+function getUserData(userId) {
+  database.delete(userId);  // BUG: Name says "get" but code "deletes"!
+  return userId;
+}
+`;
+
+const engine = new SemanticEngine();
+const parser = new ASTSemanticParser(engine.getVocabulary());
+
+const result = parser.analyzeCode(code);
+const analysis = engine.performICEAnalysis(
+  result.intent,
+  ['javascript'],
+  result.execution
+);
+
+console.log('Disharmony Score:', analysis.disharmony); // 0.85 (HIGH)
+console.log('Severity:', analysis.severity);           // 'high'
+// ⚠️ SEMANTIC BUG DETECTED!
+```
+
+### Validate Harmonious Code
+
+```typescript
+const goodCode = `
+function calculateTotal(items) {
+  return items.reduce((sum, item) => sum + item.price, 0);
+}
+`;
+
+const result = parser.analyzeCode(goodCode);
+const analysis = engine.performICEAnalysis(
+  result.intent,
+  ['javascript'],
+  result.execution
+);
+
+console.log('Disharmony Score:', analysis.disharmony); // 0.12 (LOW)
+console.log('Severity:', analysis.severity);           // 'excellent'
+// ✅ HARMONIOUS - Function name matches implementation!
+```
+
+### Work with Semantic Coordinates
+
+```typescript
+import { Coordinates } from 'javascript-code-harmonizer';
+
+const wisdom = Coordinates.wisdom();    // (0, 0, 0, 1) - get, read, analyze
+const power = Coordinates.power();      // (0, 0, 1, 0) - create, delete, modify
+
+const distance = wisdom.distanceTo(power); // 1.41 - semantically opposite
+const clarity = wisdom.getSemanticClarity(); // 1.0 - pure dimension
+```
+
+### Run the Examples
+
+```bash
+npm run example    # Compiled JavaScript
+npm run example:ts # Direct TypeScript execution
+```
+
 ## Usage
 
-### Basic Similarity Comparison
+### Text Similarity Comparison
 
 ```typescript
 import { ljpwSimilarity } from 'javascript-code-harmonizer';
@@ -60,27 +141,23 @@ const similarity = ljpwSimilarity(code1, code2);
 console.log(`Similarity: ${similarity}`); // ~0.85 (very similar)
 ```
 
-### Custom Weighting
+### Semantic Analysis
 
 ```typescript
-import { ljpwSimilarity } from 'javascript-code-harmonizer';
+import { SemanticEngine } from 'javascript-code-harmonizer';
 
-// Emphasize Levenshtein distance over Jensen-Shannon
-const similarity = ljpwSimilarity(code1, code2, 0.8, 0.2);
-```
+const engine = new SemanticEngine();
 
-### Perceptual Weighting (Coming Soon)
+// Analyze semantic meaning of text
+const coords = engine.analyzeText('validate_user_input');
+console.log('Dominant:', coords.getDominantDimension()); // 'justice'
 
-```typescript
-import { ljpwSimilarityWeighted, DEFAULT_WEIGHTS } from 'javascript-code-harmonizer';
-
-const customWeights = {
-  ...DEFAULT_WEIGHTS,
-  identifier: 1.5,  // Emphasize identifier similarity
-  whitespace: 0.05, // De-emphasize whitespace differences
-};
-
-const similarity = ljpwSimilarityWeighted(code1, code2, customWeights);
+// Calculate semantic similarity
+const similarity = engine.calculateSemanticSimilarity(
+  'get_user_data',
+  'fetch_user_information'
+);
+console.log('Similarity:', similarity); // High (both are Wisdom)
 ```
 
 ## Development
@@ -110,11 +187,95 @@ npm run format:check  # Check formatting
 
 ## API Reference
 
-### Core Functions
+### Core Classes
+
+#### `SemanticEngine`
+
+Main facade for all semantic analysis operations.
+
+```typescript
+const engine = new SemanticEngine(customVocabulary?);
+
+// Perform ICE analysis
+engine.performICEAnalysis(intentConcepts, contextConcepts, executionConcepts);
+
+// Analyze text to coordinates
+engine.analyzeText(text: string): Coordinates;
+
+// Calculate semantic similarity
+engine.calculateSemanticSimilarity(text1, text2): number;
+
+// Check if function is harmonious
+engine.isHarmonious(functionName, implementationConcepts, threshold?): boolean;
+```
+
+#### `ASTSemanticParser`
+
+Parses JavaScript/TypeScript code and extracts semantic concepts.
+
+```typescript
+const parser = new ASTSemanticParser(vocabulary);
+
+// Parse and analyze code
+parser.analyzeCode(code: string, functionName?: string): ParseResult;
+
+// Extract all functions
+parser.extractFunctions(code: string): Array<Function>;
+
+// Analyze specific function
+parser.analyzeFunction(functionNode, metadata?): ParseResult;
+```
+
+#### `Coordinates`
+
+Represents a point in 4D LJPW semantic space.
+
+```typescript
+// Create coordinates
+const coords = new Coordinates(love, justice, power, wisdom);
+
+// Factory methods
+Coordinates.love();     // (1, 0, 0, 0)
+Coordinates.justice();  // (0, 1, 0, 0)
+Coordinates.power();    // (0, 0, 1, 0)
+Coordinates.wisdom();   // (0, 0, 0, 1)
+Coordinates.anchor();   // (0.25, 0.25, 0.25, 0.25)
+
+// Calculate distance
+coords.distanceTo(other: Coordinates): number;
+coords.distanceFromAnchor(): number;
+
+// Analyze semantics
+coords.getDominantDimension(): 'love' | 'justice' | 'power' | 'wisdom';
+coords.getSemanticClarity(): number; // 0-1
+coords.cosineSimilarity(other: Coordinates): number;
+```
+
+#### `VocabularyManager`
+
+Manages the mapping of programming verbs to semantic dimensions.
+
+```typescript
+const vocab = new VocabularyManager(customVocabulary?);
+
+// Get dimension for a word
+vocab.getDimension(word: string): Dimension | null;
+
+// Analyze text
+vocab.analyzeText(text: string): Coordinates;
+
+// Analyze concept cluster
+vocab.analyzeConceptCluster(concepts: string[]): Coordinates;
+
+// Get statistics
+vocab.getVocabularyStats();
+```
+
+### Similarity Functions
 
 #### `levenshteinDistance(s1: string, s2: string): number`
 
-Calculates the minimum number of single-character edits (insertions, deletions, or substitutions) required to change one string into another.
+Calculates the minimum number of single-character edits required to change one string into another.
 
 #### `levenshteinSimilarity(s1: string, s2: string): number`
 
@@ -127,6 +288,25 @@ Returns Jensen-Shannon similarity based on character distribution, from 0 to 1.
 #### `ljpwSimilarity(s1: string, s2: string, levWeight?: number, jsWeight?: number): number`
 
 Combines Levenshtein and Jensen-Shannon metrics with configurable weights (default: 0.6 and 0.4).
+
+### Constants
+
+#### `DISHARMONY_THRESHOLDS`
+
+Severity thresholds for disharmony scores:
+
+```typescript
+{
+  EXCELLENT: 0.3,  // Code says what it means
+  LOW: 0.5,        // Minor drift
+  MEDIUM: 0.8,     // Concerning
+  HIGH: 1.2,       // Critical
+}
+```
+
+#### `PROGRAMMING_VERBS`
+
+190+ programming verbs mapped to LJPW dimensions (love, justice, power, wisdom).
 
 ## Project Structure
 
