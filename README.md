@@ -1,14 +1,36 @@
 # JavaScript Code Harmonizer
 
-A TypeScript-based code harmonizer using **LJPW** (Levenshtein-Jensen-Perceptual-Weighting) similarity metrics for intelligent code comparison and analysis.
+A TypeScript-based code harmonizer built on the **LJPW** (Love-Justice-Power-Wisdom) semantic framework for intelligent code comparison and analysis.
 
 ## Overview
 
-The JavaScript Code Harmonizer provides advanced code similarity detection by combining multiple mathematical approaches:
+The JavaScript Code Harmonizer is both a practical tool and an application of a deeper philosophical framework. It provides advanced code similarity detection by combining multiple mathematical approaches:
 
 - **Levenshtein Distance**: Edit-based similarity for structural comparison
 - **Jensen-Shannon Divergence**: Statistical similarity for character distribution analysis
 - **Perceptual Weighting**: Domain-specific adjustments for code elements (identifiers, keywords, operators, etc.)
+
+### The LJPW Framework
+
+**LJPW** represents the four fundamental dimensions of semantic meaning:
+
+- **Love (L)**: Connection, relationships, unity between code elements
+- **Justice (J)**: Correctness, fairness, logical truth and type safety
+- **Power (P)**: Action, execution, state transformations
+- **Wisdom (W)**: Knowledge, information, understanding and context
+
+This framework reveals that code is not just syntax—it carries semantic meaning that can be measured, compared, and harmonized. When these dimensions align (Intent matches Execution), we have semantic harmony. When they contradict, we have bugs.
+
+> **Note**: While the current implementation focuses on similarity metrics using Levenshtein-Jensen methods, the LJPW acronym honors the deeper semantic philosophy that guides this project's vision.
+
+### 📚 Deep Dive: Theoretical Foundations
+
+For those interested in the mathematical and philosophical underpinnings:
+
+- **[Mathematical Foundation](docs/MATHEMATICAL_FOUNDATION.md)** - Proof that LJPW forms a complete, minimal, orthogonal basis for semantic meaning
+- **[Philosophy & Framework](docs/PHILOSOPHY.md)** - The anchor point (1,1,1,1), ICE framework, and semantic harmony theory
+- **[Programming Language Semantics](docs/PROGRAMMING_LANGUAGE_SEMANTICS.md)** - How programming constructs map to LJPW semantic space
+- **[Semantic Programming Languages](docs/SEMANTIC_PROGRAMMING_LANGUAGE.md)** - Vision for languages built on semantic coordinates
 
 ## Features
 
@@ -110,28 +132,57 @@ Combines Levenshtein and Jensen-Shannon metrics with configurable weights (defau
 
 ```
 javascript-code-harmonizer/
+├── docs/                                        # Theoretical documentation
+│   ├── MATHEMATICAL_FOUNDATION.md              # LJPW mathematical proofs
+│   ├── PHILOSOPHY.md                           # Framework philosophy
+│   ├── PROGRAMMING_LANGUAGE_SEMANTICS.md       # Code semantics theory
+│   └── SEMANTIC_PROGRAMMING_LANGUAGE.md        # Future language design
 ├── src/
 │   ├── core/
-│   │   ├── ljpw.ts           # Core LJPW implementation
-│   │   └── ljpw.test.ts      # Comprehensive tests
+│   │   ├── ljpw.ts                             # Core LJPW implementation
+│   │   └── ljpw.test.ts                        # Comprehensive tests
 │   ├── utils/
-│   │   └── helpers.ts        # Utility functions
-│   └── index.ts              # Main exports
-├── dist/                     # Built output (generated)
+│   │   └── helpers.ts                          # Utility functions
+│   └── index.ts                                # Main exports
+├── dist/                                       # Built output (generated)
 ├── package.json
 ├── tsconfig.json
 ├── jest.config.js
 └── README.md
 ```
 
+## Documentation
+
+### Theoretical Framework
+
+The `docs/` folder contains comprehensive documentation on the LJPW semantic framework:
+
+| Document | Description |
+|----------|-------------|
+| [Mathematical Foundation](docs/MATHEMATICAL_FOUNDATION.md) | Formal proofs of LJPW as a complete, minimal, orthogonal basis for semantic meaning. Includes vector space definitions, orthogonality proofs, and mathematical rigor. |
+| [Philosophy & Framework](docs/PHILOSOPHY.md) | Deep dive into the anchor point (1,1,1,1), the ICE (Intent-Context-Execution) framework, semantic harmony theory, and the DIVE-V2 debugging engine. |
+| [Programming Language Semantics](docs/PROGRAMMING_LANGUAGE_SEMANTICS.md) | Analysis of how all programming constructs map to LJPW space. Proves that code fundamentally requires all four dimensions to function. |
+| [Semantic Programming Languages](docs/SEMANTIC_PROGRAMMING_LANGUAGE.md) | Vision for future programming languages built with semantic coordinates as first-class citizens. Explores how different paradigms emphasize different LJPW dimensions. |
+
+### Practical Usage
+
+See the [Usage](#usage) section above for code examples and the [API Reference](#api-reference) for detailed function documentation.
+
 ## Roadmap
 
+### Near Term
 - [ ] AST-based code tokenization
-- [ ] Token-level perceptual weighting
-- [ ] Support for multiple languages
+- [ ] Token-level perceptual weighting implementation
+- [ ] Support for multiple languages (Python, Java, etc.)
 - [ ] CLI tool for code comparison
+- [ ] VS Code extension for inline similarity analysis
+
+### Long Term
+- [ ] Full semantic coordinate calculation for code blocks
 - [ ] Integration with popular linters/formatters
 - [ ] Performance optimizations for large codebases
+- [ ] Semantic debugging tools based on LJPW framework
+- [ ] Language design experiments incorporating semantic primitives
 
 ## Contributing
 
