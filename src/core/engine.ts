@@ -191,8 +191,6 @@ export class ICEAnalyzer {
     context: Coordinates,
     execution: Coordinates
   ): number {
-    const anchor = Coordinates.anchor();
-
     // Calculate average distance from anchor
     const avgDistanceFromAnchor =
       (intent.distanceFromAnchor() + context.distanceFromAnchor() + execution.distanceFromAnchor()) / 3;

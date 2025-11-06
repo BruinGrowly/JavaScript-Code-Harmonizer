@@ -12,7 +12,7 @@ import * as path from 'path';
 import { SemanticEngine } from '../core/engine';
 import { ASTSemanticParser } from '../parser/ast-parser';
 import { SemanticNamingEngine } from '../naming/semantic-naming';
-import { FunctionAnalysis, ICEAnalysisResult } from '../core/coordinates';
+import { ICEAnalysisResult } from '../core/coordinates';
 
 /**
  * Analysis configuration

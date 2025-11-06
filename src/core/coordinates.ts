@@ -70,7 +70,7 @@ export class Coordinates {
    * Create pure Power coordinates (0, 0, 1, 0)
    */
   static power(): Coordinates {
-    return new Coordinates(0, 0, 0, 1);
+    return new Coordinates(0, 0, 1, 0);
   }
 
   /**
