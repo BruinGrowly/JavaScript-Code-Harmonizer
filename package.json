@@ -23,8 +23,10 @@
     "demo:built": "tsc && node dist/examples/cli-demo.js",
     "demo:phase1": "ts-node examples/phase1-demo.ts",
     "demo:phase2": "ts-node examples/phase2-demo.ts",
+    "demo:ux": "ts-node examples/ux-demo.ts",
     "harmonizer": "ts-node src/cli/harmonizer.ts",
     "harmonizer:v2": "ts-node src/cli/harmonizer-v2.ts",
+    "harmonizer:cli": "ts-node src/cli/harmonizer-cli.ts",
     "cli": "tsc && node dist/cli/harmonizer.js"
   },
   "keywords": [
