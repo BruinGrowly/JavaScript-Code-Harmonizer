@@ -52,9 +52,9 @@ For those interested in the mathematical and philosophical underpinnings:
 - **Production Ready**: Linting, formatting, and build tools configured
 - **Working Examples**: Real-world semantic bug detection demos
 
-### 🚀 Phase 1: Production Features (NEW!)
+### 🚀 Phase 1: Production Features
 
-The tool is now production-ready for large legacy codebases with:
+The tool is production-ready for large legacy codebases with:
 
 #### Multi-File Project Analysis
 - **Recursive Directory Scanning**: Analyze entire projects with glob patterns
@@ -93,6 +93,210 @@ The tool is now production-ready for large legacy codebases with:
 - **CI/CD Optimized**: `--quiet`, `--exit-code`, `--baseline` flags
 - **Developer Friendly**: `--verbose`, `--suggest-names`, progress bars
 
+### ✨ Phase 2.5: Interactive UX (NEW!)
+
+Focus on delightful user experience with 7 new interactive commands:
+
+#### Interactive Commands
+
+##### `harmonizer init` - Interactive Setup Wizard
+- **First-Time Magic**: Perfect for new users
+- **Auto-Detection**: Recognizes project type (Node.js, TypeScript, etc.)
+- **Guided Configuration**: Creates `.harmonizerrc.json` interactively
+- **First Analysis**: Runs initial scan and shows results
+- **Next Steps**: Shows exactly what to do next
+
+```bash
+harmonizer init
+# ✨ Welcome to Code Harmonizer! ✨
+# → Detects: Node.js TypeScript project (52 JS/TS files)
+# → Creates config: .harmonizerrc.json
+# → Runs first analysis
+# → Shows: "harmonizer status" for health check
+```
+
+##### `harmonizer fix [target]` - Interactive Refactoring
+- **Step-by-Step**: Guides through each disharmonious function
+- **Preview Changes**: See before/after function names
+- **Smart Suggestions**: Shows top 5 rename suggestions with confidence scores
+- **Auto-Apply Mode**: `--auto-apply` for automated refactoring
+- **Dry Run**: `--dry-run` to preview without changes
+- **Severity Filtering**: `--severity HIGH` to focus on critical issues
+
+```bash
+harmonizer fix ./src
+
+# [1/10] src/user.js:42
+# ❌ Function: getUserData
+#    Disharmony: 0.849 [HIGH]
+#
+# Suggested names:
+#   1. deleteUserData (85% confidence)
+#   2. removeUserData (82% confidence)
+#   3. destroyUserData (78% confidence)
+#
+# What would you like to do?
+#   → Rename to: deleteUserData
+#   → Skip this function
+#   → Exit
+```
+
+##### `harmonizer explain <file:line>` - Educational Deep-Dive
+- **What's Wrong**: Plain English explanation of the semantic issue
+- **Why It Matters**: Real-world impact and consequences
+- **How to Fix**: 3 specific refactoring suggestions
+- **LJPW Analysis**: Optional `--verbose` for semantic trajectory
+- **Learn by Example**: Educational approach (WHY not just WHAT)
+
+```bash
+harmonizer explain src/user.js:42
+
+# ═══════════════════════════════════════════════════════════
+#            🔍 Issue Explanation
+# ═══════════════════════════════════════════════════════════
+#
+# WHAT'S WRONG?
+# Function named "getUserData" but implementation DELETES user data.
+# Name says Wisdom (get/read) but code does Power (delete/destroy).
+#
+# WHY DOES THIS MATTER?
+# • Developers calling this function expect it to be read-only
+# • Can cause data loss in production
+# • Makes code impossible to understand
+# • Violates principle of least surprise
+#
+# HOW TO FIX?
+#   1. Rename to: deleteUserData()
+#   2. Rename to: removeUserData()
+#   3. Split into: getUser() + deleteUser()
+```
+
+##### `harmonizer status [target]` - Health Dashboard
+- **Overall Score**: 0-100 health grade (A-F)
+- **Visual Progress**: ASCII art progress bars
+- **Severity Distribution**: HIGH/MEDIUM/LOW breakdown with charts
+- **Top 5 Worst Files**: Files needing immediate attention
+- **Actionable Recommendations**: Specific next steps based on health
+
+```bash
+harmonizer status ./src
+
+# ═══════════════════════════════════════════════════════════
+#            📊 Code Health Dashboard
+# ═══════════════════════════════════════════════════════════
+#
+# OVERALL HEALTH
+# ████████████████░░░░  82/100 - Grade: B
+#
+# FILES:  52 analyzed, 0 errors
+# FUNCTIONS: 234 total, 42 disharmonious (82% success rate)
+#
+# SEVERITY DISTRIBUTION
+#   ❌ HIGH: 5    █████░░░░░░░░░░░░░░░
+#   ⚠️  MEDIUM: 15 ███████████████░░░░░
+#   ℹ️  LOW: 22    ████████████████████
+#
+# TOP 5 FILES NEEDING ATTENTION
+#   1. src/auth.js - 0.742 avg (8 issues)
+#   2. src/database.js - 0.685 avg (5 issues)
+#   ...
+#
+# RECOMMENDATIONS
+#   ⚠️  Good, but room for improvement.
+#   • Fix 5 HIGH severity: harmonizer fix --severity HIGH
+#   • Review top files: harmonizer fix src/auth.js
+```
+
+##### `harmonizer examples` - Interactive Example Browser
+- **12 Categorized Examples**: Basics, CI/CD, Git, Reports, etc.
+- **Interactive Selection**: Browse by category
+- **Copy-Paste Ready**: All commands ready to run
+- **Quick Reference**: Learn by example
+
+```bash
+harmonizer examples
+
+# BASICS
+#   1. Analyze a single file
+#      harmonizer examples/test-files/buggy-code.js
+#
+#   2. Analyze directory recursively
+#      harmonizer ./src --recursive
+#
+# CI/CD INTEGRATION
+#   3. Save baseline for CI
+#      harmonizer ./src -r --save-baseline baseline.json
+#
+# [Browse all categories]
+```
+
+##### `harmonizer tutorial` - 5-Minute Onboarding
+- **Guided Walkthrough**: Perfect for first-time users
+- **Interactive Learning**: Hands-on with your own code
+- **8 Learning Steps**: From basics to advanced features
+- **No Reading Required**: Learn by doing
+
+```bash
+harmonizer tutorial
+
+# ═══════════════════════════════════════════════════════════
+#      🎓 Welcome to Code Harmonizer Tutorial
+# ═══════════════════════════════════════════════════════════
+# This 5-minute tutorial shows you everything you need to know.
+#
+# STEP 1: What is Code Harmonizer?
+# [Interactive explanation with examples]
+# Press ENTER to continue...
+```
+
+##### `harmonizer help [command]` - Enhanced Help
+- **Categorized Reference**: Commands grouped by purpose
+- **Quick Start**: Most common commands first
+- **Command-Specific Help**: `harmonizer help fix`
+- **Extensive Examples**: Real-world usage patterns
+- **Beautiful Formatting**: Color-coded and easy to scan
+
+```bash
+harmonizer help
+
+# QUICK START
+#   harmonizer init              Set up Code Harmonizer
+#   harmonizer status            View project health
+#   harmonizer fix               Fix issues interactively
+#
+# INTERACTIVE COMMANDS
+#   harmonizer init              Interactive setup
+#   harmonizer fix [target]      Guided refactoring
+#   harmonizer explain file:line Deep-dive explanation
+#   ...
+```
+
+#### Developer Experience Improvements
+
+**Improved Error Messages**
+- Helpful context and suggestions
+- Color-coded severity levels
+- Links to documentation
+- No more cryptic errors!
+
+**Interactive Prompts**
+- Yes/no confirmations with defaults
+- Text input with auto-completion
+- Multiple choice selection
+- Pause for user review
+
+**Beautiful Output**
+- Color-coded messages (chalk)
+- ASCII art headers and dividers
+- Emoji indicators for quick scanning
+- Progress bars for long operations
+
+**Educational Approach**
+- Explains WHY issues matter
+- Shows real-world impact
+- Teaches semantic concepts
+- Helps users understand, not just fix
+
 ## Installation
 
 ```bash
@@ -100,6 +304,22 @@ npm install
 ```
 
 ## Quick Start
+
+### 🎯 New User? Start Here!
+
+```bash
+# Interactive setup wizard (recommended for first-time users)
+npm run harmonizer:cli init
+
+# Check your project health
+npm run harmonizer:cli status
+
+# Learn with interactive tutorial
+npm run harmonizer:cli tutorial
+
+# Browse examples
+npm run harmonizer:cli examples
+```
 
 ### Detect a Semantic Bug
 
@@ -677,19 +897,62 @@ See the [Usage](#usage) section above for code examples and the [API Reference](
 
 ## Roadmap
 
-### Near Term
-- [ ] AST-based code tokenization
-- [ ] Token-level perceptual weighting implementation
-- [ ] Support for multiple languages (Python, Java, etc.)
-- [ ] CLI tool for code comparison
-- [ ] VS Code extension for inline similarity analysis
+### ✅ Completed (v0.2.0)
 
-### Long Term
+**Phase 1: Production Infrastructure**
+- [x] Multi-file project analysis with parallel processing
+- [x] Configuration system (.harmonizerrc.json, .harmonizerignore)
+- [x] File caching with SHA-256 hashing (3.7x speedup)
+- [x] CI/CD integration (baselines, exit codes, SARIF output)
+- [x] Advanced CLI with multiple output formats
+
+**Phase 2: Developer Experience**
+- [x] HTML reports with Chart.js visualizations
+- [x] Git integration (diff analysis, blame, hooks)
+- [x] Watch mode for continuous analysis
+- [x] Enhanced CLI with colors and progress indicators
+
+**Phase 2.5: Interactive UX**
+- [x] Interactive init command (setup wizard)
+- [x] Interactive fix command (guided refactoring)
+- [x] Explain command (educational deep-dives)
+- [x] Examples command (interactive browser)
+- [x] Status command (health dashboard)
+- [x] Tutorial command (5-minute onboarding)
+- [x] Enhanced help system
+- [x] Improved error messages
+- [x] Beautiful output with colors and ASCII art
+
+### 🚧 In Progress / Future Enhancements
+
+**Testing & Quality**
+- [ ] Test suite for Phase 1/2 features (4,258 LOC untested)
+- [ ] Integration tests for CLI commands
+- [ ] E2E tests for CI/CD workflows
+
+**Distribution**
+- [ ] Publish to npm registry
+- [ ] GitHub releases with binaries
+- [ ] Docker image for CI/CD
+
+**IDE Integration**
+- [ ] VS Code extension for inline analysis
+- [ ] JetBrains plugin
+- [ ] Language Server Protocol (LSP) support
+
+**Advanced Features**
+- [ ] Auto-fix with AST manipulation (safe refactoring)
+- [ ] Machine learning for better name suggestions
+- [ ] Support for more languages (Python, Java, Go, etc.)
+- [ ] Team dashboards with analytics
+- [ ] Historical trend analysis
+
+**Long Term Vision**
 - [ ] Full semantic coordinate calculation for code blocks
 - [ ] Integration with popular linters/formatters
-- [ ] Performance optimizations for large codebases
 - [ ] Semantic debugging tools based on LJPW framework
 - [ ] Language design experiments incorporating semantic primitives
+- [ ] Real-time analysis in IDEs
 
 ## Contributing
 
