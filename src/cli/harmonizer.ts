@@ -320,51 +320,12 @@ export class CodeHarmonizer {
 }
 
 /**
- * Main CLI entry point
+ * Main CLI entry point - delegates to enhanced CLI
  */
-export async function main(args: string[]) {
-  // Simple argument parsing (for now, before adding commander)
-  const filePath = args[0];
-
-  if (!filePath) {
-    console.error('Usage: harmonizer <file.js|file.ts> [options]');
-    console.error('');
-    console.error('Options:');
-    console.error('  --suggest-names     Suggest better function names');
-    console.error('  --threshold <n>     Disharmony threshold (default: 0.5)');
-    console.error('  --format json       Output in JSON format');
-    console.error('  --verbose, -v       Show detailed semantic trajectories');
-    console.error('');
-    process.exit(1);
-  }
-
-  if (!fs.existsSync(filePath)) {
-    console.error(`Error: File not found: ${filePath}`);
-    process.exit(1);
-  }
-
-  // Parse options
-  const config: HarmonizerConfig = {
-    suggestNames: args.includes('--suggest-names'),
-    verbose: args.includes('--verbose') || args.includes('-v'),
-    format: args.includes('--format') && args[args.indexOf('--format') + 1] === 'json' ? 'json' : 'text',
-  };
-
-  const thresholdIndex = args.indexOf('--threshold');
-  if (thresholdIndex !== -1) {
-    config.threshold = parseFloat(args[thresholdIndex + 1]) || 0.5;
-  }
-
-  const harmonizer = new CodeHarmonizer(config);
-  const result = await harmonizer.analyzeFile(filePath);
-  const output = harmonizer.generateOutput(result);
-
-  console.log(output);
-
-  // Exit with error code if disharmonious functions found
-  if (result.summary.disharmonious > 0) {
-    process.exit(1);
-  }
+export async function main(_args: string[]) {
+  // Delegate to the enhanced CLI with all interactive features
+  const { main: cliMain } = await import('./harmonizer-cli');
+  await cliMain();
 }
 
 // Run CLI if executed directly
