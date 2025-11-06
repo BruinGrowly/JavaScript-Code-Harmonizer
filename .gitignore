@@ -32,3 +32,4 @@ yarn-error.log*
 # Temp files
 *.tmp
 .cache/
+harmonizer-report.html

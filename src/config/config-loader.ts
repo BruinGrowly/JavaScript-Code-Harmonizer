@@ -71,6 +71,7 @@ export interface HarmonizerConfig {
     format?: 'text' | 'json' | 'sarif' | 'markdown';
     verbose?: boolean;
     showProgress?: boolean;
+    mode?: 'pragmatic' | 'standard' | 'verbose';
   };
 
   /**
@@ -128,6 +129,7 @@ export const DEFAULT_CONFIG: Required<HarmonizerConfig> = {
     format: 'text',
     verbose: false,
     showProgress: true,
+    mode: 'pragmatic',
   },
   ci: {
     failOnHigh: false,

@@ -40,6 +40,7 @@ For those interested in the mathematical and philosophical underpinnings:
 - **4D Semantic Space**: Maps code to Love-Justice-Power-Wisdom coordinates
 - **AST-Based Analysis**: Parses JavaScript/TypeScript using Babel
 - **190+ Verb Vocabulary**: Comprehensive programming verb-to-dimension mappings
+- **Customizable Vocabulary**: Extend with domain-specific verbs (e.g., `"ship": "power"`, `"generate": "wisdom"`)
 
 ### Code Similarity Metrics
 - **Multi-metric Similarity**: Combines Levenshtein distance and Jensen-Shannon divergence
@@ -307,6 +308,8 @@ npm install
 
 ### 🎯 New User? Start Here!
 
+> **Want pragmatic, no-nonsense usage?** See the **[Practical Guide](docs/PRACTICAL_GUIDE.md)** — real bugs, real fixes, zero mysticism.
+
 ```bash
 # Interactive setup wizard (recommended for first-time users)
 npm run harmonizer:cli init
@@ -320,6 +323,8 @@ npm run harmonizer:cli tutorial
 # Browse examples
 npm run harmonizer:cli examples
 ```
+
+**By default, Harmonizer uses pragmatic mode** — plain English explanations focused on finding real bugs, not semantic theory. For advanced users, verbose mode shows full LJPW analysis.
 
 ### Detect a Semantic Bug
 

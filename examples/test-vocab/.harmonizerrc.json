@@ -1,0 +1,19 @@
+{
+  "vocabulary": {
+    "custom": {
+      "ship": "power",
+      "activate": "power",
+      "generate": "wisdom",
+      "compute": "wisdom",
+      "verify": "justice",
+      "authorize": "justice"
+    }
+  },
+  "analysis": {
+    "suggestNames": true,
+    "minConfidence": 0.7
+  },
+  "output": {
+    "mode": "pragmatic"
+  }
+}
