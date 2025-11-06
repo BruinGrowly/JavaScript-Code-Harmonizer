@@ -1,11 +1,11 @@
 /**
  * JavaScript Code Harmonizer
  *
- * A TypeScript-based code harmonizer using LJPW (Levenshtein-Jensen-Perceptual-Weighting)
- * similarity metrics for code comparison and analysis.
+ * A TypeScript-based code harmonizer built on the LJPW (Love-Justice-Power-Wisdom)
+ * semantic framework for intelligent code comparison and semantic bug detection.
  */
 
-// Export core LJPW functionality
+// Core LJPW similarity metrics
 export {
   levenshteinDistance,
   levenshteinSimilarity,
@@ -19,5 +19,30 @@ export {
   type PerceptualWeights,
 } from './core/ljpw';
 
+// Semantic coordinate system
+export {
+  Coordinates,
+  type SemanticResult,
+  type ICEAnalysisResult,
+  type FunctionAnalysis,
+} from './core/coordinates';
+
+// Vocabulary and semantic engine
+export { VocabularyManager, PROGRAMMING_VERBS, COMPOUND_PATTERNS, type Dimension } from './core/vocabulary';
+export {
+  SemanticEngine,
+  SemanticAnalyzer,
+  ICEAnalyzer,
+  DISHARMONY_THRESHOLDS,
+} from './core/engine';
+
+// AST parser
+export {
+  ASTSemanticParser,
+  type FunctionMetadata,
+  type ParseResult,
+  type ExecutionMapping,
+} from './parser/ast-parser';
+
 // Version info
-export const VERSION = '0.1.0';
+export const VERSION = '0.2.0';
