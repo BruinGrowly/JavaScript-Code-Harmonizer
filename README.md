@@ -1,6 +1,6 @@
 # JavaScript Code Harmonizer
 
-A TypeScript-based code harmonizer built on the **LJPW** (Love-Justice-Power-Wisdom) semantic framework for intelligent code comparison and analysis.
+A TypeScript-based code harmonizer built on the **LJPW** semantic framework for intelligent code comparison and analysis.
 
 ## Overview
 
