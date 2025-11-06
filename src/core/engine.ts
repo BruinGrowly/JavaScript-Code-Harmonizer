@@ -8,6 +8,9 @@
 import { Coordinates, ICEAnalysisResult, SemanticResult } from './coordinates';
 import { VocabularyManager } from './vocabulary';
 
+// Re-export VocabularyManager for convenience
+export { VocabularyManager };
+
 /**
  * Severity thresholds for disharmony scores
  */
