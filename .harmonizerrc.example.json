@@ -1,0 +1,80 @@
+{
+  "$schema": "https://harmonizer.dev/schema.json",
+  "description": "Example configuration for JavaScript Code Harmonizer",
+
+  "thresholds": {
+    "disharmony": {
+      "low": 0.3,
+      "medium": 0.6,
+      "high": 0.8
+    }
+  },
+
+  "ignore": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/coverage/**",
+    "**/*.min.js",
+    "**/*.bundle.js",
+    "**/.git/**",
+    "**/vendor/**"
+  ],
+
+  "rules": {
+    "semantic-naming": "warn",
+    "ice-analysis": "warn",
+    "disharmony-threshold": "error"
+  },
+
+  "vocabulary": {
+    "custom": {
+      "_comment": "Map domain-specific verbs to semantic dimensions",
+      "_comment2": "Dimensions: love | justice | power | wisdom",
+
+      "ship": "power",
+      "activate": "power",
+      "generate": "wisdom",
+      "compute": "wisdom",
+      "verify": "justice",
+      "authorize": "justice",
+      "link": "love",
+      "associate": "love",
+
+      "_examples": {
+        "wisdom": "get, read, fetch, retrieve, find, load, query, analyze",
+        "power": "create, delete, update, modify, write, insert, remove, set",
+        "justice": "validate, verify, check, test, ensure, assert, confirm",
+        "love": "connect, link, join, merge, combine, relate, associate"
+      }
+    }
+  },
+
+  "analysis": {
+    "suggestNames": true,
+    "topSuggestions": 5,
+    "minConfidence": 0.7
+  },
+
+  "performance": {
+    "parallelism": 4,
+    "cache": true,
+    "incremental": true,
+    "fileTimeout": 30000,
+    "maxMemory": 512
+  },
+
+  "output": {
+    "format": "text",
+    "verbose": false,
+    "showProgress": true,
+    "mode": "pragmatic"
+  },
+
+  "ci": {
+    "failOnHigh": true,
+    "failOnMedium": false,
+    "baselineFile": "harmonizer-baseline.json",
+    "exitCode": true
+  }
+}
