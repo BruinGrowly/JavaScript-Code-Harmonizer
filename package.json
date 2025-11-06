@@ -4,6 +4,9 @@
   "description": "A TypeScript-based code harmonizer using LJPW (Love-Justice-Power-Wisdom) semantic framework for semantic bug detection",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "bin": {
+    "harmonizer": "dist/cli/harmonizer.js"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
@@ -15,7 +18,9 @@
     "format": "prettier --write \"src/**/*.ts\" \"examples/**/*.ts\"",
     "format:check": "prettier --check \"src/**/*.ts\" \"examples/**/*.ts\"",
     "example": "tsc && node dist/examples/basic-usage.js",
-    "example:ts": "ts-node examples/basic-usage.ts"
+    "example:ts": "ts-node examples/basic-usage.ts",
+    "harmonizer": "ts-node src/cli/harmonizer.ts",
+    "cli": "tsc && node dist/cli/harmonizer.js"
   },
   "keywords": [
     "code-harmonizer",
