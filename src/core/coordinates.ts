@@ -173,9 +173,10 @@ export class Coordinates {
     const variance = values.reduce((sum, v) => sum + (v - mean) ** 2, 0) / 4;
     const stdDev = Math.sqrt(variance);
 
-    // Clarity is inversely related to standard deviation
-    // Max std dev for normalized [0,1] values is ~0.5
-    return Math.max(0, 1 - stdDev / 0.5);
+    // Clarity is directly proportional to standard deviation
+    // Max std dev for 4 normalized values summing to 1 is sqrt(3)/4 ≈ 0.433
+    const maxStdDev = Math.sqrt(3) / 4;
+    return Math.min(1, stdDev / maxStdDev);
   }
 
   /**

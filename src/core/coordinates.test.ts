@@ -223,8 +223,8 @@ describe('Coordinates', () => {
     });
 
     it('should use epsilon for floating point comparison', () => {
-      const c1 = new Coordinates(1.01, 2, 3, 4);
-      const c2 = new Coordinates(1.02, 2, 3, 4);
+      const c1 = new Coordinates(1, 2, 3, 4);
+      const c2 = new Coordinates(1.1, 2, 3, 4);
 
       // With larger epsilon, should be equal
       expect(c1.equals(c2, 0.01)).toBe(true);
