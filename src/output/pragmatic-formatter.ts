@@ -45,6 +45,25 @@ export class PragmaticFormatter {
       chalk.gray(`  Confidence: ${(func.disharmony * 100).toFixed(0)}%`)
     );
 
+    // Show baseline metrics if available
+    if (func.baselines) {
+      const b = func.baselines;
+      lines.push('');
+      lines.push(chalk.cyan('  Quality Metrics:'));
+      lines.push(
+        chalk.gray(
+          `    Composite Score: ${chalk.white(b.compositeScore.toFixed(2))} - ${b.interpretation}`
+        )
+      );
+      lines.push(
+        chalk.gray(
+          `    Robustness: ${chalk.white(b.robustness.toFixed(2))} | ` +
+            `Effectiveness: ${chalk.white(b.effectiveness.toFixed(2))} | ` +
+            `Growth: ${chalk.white(b.growthPotential.toFixed(2))}`
+        )
+      );
+    }
+
     // Show suggestions if available and meet confidence threshold
     if (
       options.showSuggestions &&

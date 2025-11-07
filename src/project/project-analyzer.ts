@@ -80,6 +80,15 @@ export interface FileAnalysisResult {
     disharmony: number;
     severity: 'LOW' | 'MEDIUM' | 'HIGH';
     suggestions?: Array<{ name: string; similarity: number }>;
+    baselines?: {
+      robustness: number;
+      effectiveness: number;
+      growthPotential: number;
+      harmony: number;
+      compositeScore: number;
+      distanceFromNaturalEquilibrium: number;
+      interpretation: string;
+    };
   }>;
   metrics: {
     totalFunctions: number;
@@ -457,6 +466,7 @@ export class ProjectAnalyzer {
         disharmony: iceAnalysis.disharmony,
         severity: severityMap[iceAnalysis.severity] || 'LOW',
         suggestions,
+        baselines: iceAnalysis.baselines,
       });
     }
 

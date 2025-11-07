@@ -7,6 +7,7 @@
 
 import { Coordinates, ICEAnalysisResult, SemanticResult } from './coordinates';
 import { VocabularyManager } from './vocabulary';
+import { LJPWBaselines, AbsoluteCoordinates } from './ljpw-baselines';
 
 // Re-export VocabularyManager for convenience
 export { VocabularyManager };
@@ -151,6 +152,9 @@ export class ICEAnalyzer {
     // Determine severity
     const severity = this.calculateSeverity(intentExecutionDistance);
 
+    // Calculate LJPW Mathematical Baselines
+    const baselines = this.calculateBaselines(execution);
+
     return {
       intent,
       context,
@@ -161,6 +165,7 @@ export class ICEAnalyzer {
       benevolenceScore,
       disharmony: intentExecutionDistance,
       severity,
+      baselines,
     };
   }
 
@@ -224,6 +229,36 @@ export class ICEAnalyzer {
     if (disharmony <= DISHARMONY_THRESHOLDS.MEDIUM) return 'medium';
     if (disharmony <= DISHARMONY_THRESHOLDS.HIGH) return 'high';
     return 'critical';
+  }
+
+  /**
+   * Calculate LJPW Mathematical Baselines for the execution coordinates
+   *
+   * Note: We use execution coordinates as the primary measure of code quality,
+   * since that's what the code actually does (vs what it promises to do).
+   */
+  private calculateBaselines(execution: Coordinates): ICEAnalysisResult['baselines'] {
+    // Convert normalized coordinates to absolute coordinates
+    // The Coordinates class normalizes to sum=1.0, but baselines use absolute values
+    // We scale back up by 4 to get meaningful absolute values
+    const absoluteCoords: AbsoluteCoordinates = {
+      love: execution.love * 4,
+      justice: execution.justice * 4,
+      power: execution.power * 4,
+      wisdom: execution.wisdom * 4,
+    };
+
+    const compositeScore = LJPWBaselines.compositeScore(absoluteCoords);
+
+    return {
+      robustness: LJPWBaselines.harmonicMean(absoluteCoords),
+      effectiveness: LJPWBaselines.geometricMean(absoluteCoords),
+      growthPotential: LJPWBaselines.couplingAwareSum(absoluteCoords),
+      harmony: LJPWBaselines.harmonyIndex(absoluteCoords),
+      compositeScore,
+      distanceFromNaturalEquilibrium: LJPWBaselines.distanceFromNaturalEquilibrium(absoluteCoords),
+      interpretation: LJPWBaselines.interpretCompositeScore(compositeScore),
+    };
   }
 }
 

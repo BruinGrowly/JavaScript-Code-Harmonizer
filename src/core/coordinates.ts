@@ -225,6 +225,17 @@ export interface ICEAnalysisResult {
   benevolenceScore: number;
   disharmony: number; // same as intentExecutionDistance
   severity: 'excellent' | 'low' | 'medium' | 'high' | 'critical';
+
+  // LJPW Mathematical Baselines metrics
+  baselines?: {
+    robustness: number; // harmonic mean (weakest link)
+    effectiveness: number; // geometric mean (balanced performance)
+    growthPotential: number; // coupling-aware sum (can exceed 1.0)
+    harmony: number; // harmony index (balance)
+    compositeScore: number; // overall performance
+    distanceFromNaturalEquilibrium: number;
+    interpretation: string; // human-readable composite score interpretation
+  };
 }
 
 /**

@@ -66,6 +66,15 @@ export interface FunctionAnalysisResult {
     power: { intent: number; execution: number; delta: number };
     wisdom: { intent: number; execution: number; delta: number };
   };
+  baselines?: {
+    robustness: number;
+    effectiveness: number;
+    growthPotential: number;
+    harmony: number;
+    compositeScore: number;
+    distanceFromNaturalEquilibrium: number;
+    interpretation: string;
+  };
 }
 
 /**

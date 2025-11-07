@@ -318,6 +318,56 @@ export class HtmlReporter {
             font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
         }
 
+        .baselines-metrics {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid ${borderColor};
+        }
+
+        .baselines-title {
+            font-size: 0.85em;
+            color: #8b95a5;
+            margin-bottom: 8px;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 10px;
+            background: ${isDark ? '#1a1a1a' : '#f8f9fa'};
+            border-radius: 6px;
+            font-size: 0.85em;
+        }
+
+        .metric-label {
+            color: #8b95a5;
+            font-weight: 500;
+        }
+
+        .metric-value {
+            font-weight: 700;
+            color: #667eea;
+            font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+        }
+
+        .baselines-interpretation {
+            font-size: 0.85em;
+            color: ${isDark ? '#9ca3af' : '#6b7280'};
+            font-style: italic;
+            padding: 6px 10px;
+            background: ${isDark ? '#1f2937' : '#f3f4f6'};
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+        }
+
         .file-details {
             margin-top: 20px;
         }
@@ -500,6 +550,36 @@ export class HtmlReporter {
             `;
         }
 
+        // Add baselines metrics if available
+        let baselinesHtml = '';
+        if (issue.func.baselines) {
+          const b = issue.func.baselines;
+          baselinesHtml = `
+                <div class="baselines-metrics">
+                    <div class="baselines-title">📊 Quality Metrics</div>
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <span class="metric-label">Composite:</span>
+                            <span class="metric-value">${b.compositeScore.toFixed(2)}</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Robustness:</span>
+                            <span class="metric-value">${b.robustness.toFixed(2)}</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Effectiveness:</span>
+                            <span class="metric-value">${b.effectiveness.toFixed(2)}</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Growth:</span>
+                            <span class="metric-value">${b.growthPotential.toFixed(2)}</span>
+                        </div>
+                    </div>
+                    <div class="baselines-interpretation">${this.escapeHtml(b.interpretation)}</div>
+                </div>
+            `;
+        }
+
         return `
                 <div class="issue-item ${severityClass}">
                     <div class="issue-header">
@@ -510,6 +590,7 @@ export class HtmlReporter {
                     <div class="issue-score">
                         Disharmony: <span class="score-value">${issue.func.disharmony.toFixed(3)}</span>
                     </div>
+                    ${baselinesHtml}
                     ${suggestionsHtml}
                 </div>
             `;
