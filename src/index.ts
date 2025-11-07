@@ -27,6 +27,17 @@ export {
   type FunctionAnalysis,
 } from './core/coordinates';
 
+// LJPW Mathematical Baselines
+export {
+  LJPWBaselines,
+  NUMERICAL_EQUIVALENTS,
+  REFERENCE_POINTS,
+  COUPLING_MATRIX,
+  type AbsoluteCoordinates,
+  type EffectiveDimensions,
+  type LJPWDiagnostic,
+} from './core/ljpw-baselines';
+
 // Vocabulary and semantic engine
 export { VocabularyManager, PROGRAMMING_VERBS, COMPOUND_PATTERNS, type Dimension } from './core/vocabulary';
 export {
